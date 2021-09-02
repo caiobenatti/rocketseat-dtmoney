@@ -1,5 +1,6 @@
 // import styled from 'styled-components'
 
+import { Header } from "./components/Header";
 import { GlobalStyle } from "./styles/global";
 
 // const Title = styled.h1` //vc usa aqui a tag HTML que vc quer modificar e usa a maiuscula no nome para nome da constante (best practices)
@@ -9,11 +10,12 @@ import { GlobalStyle } from "./styles/global";
 
 export function App() {
   return (
-    <div className="App">
+    <> {/* isso eh um fragment, que nao interfere com as divs dentro do react, eh tipo uma div */}
       {/* <Title>Hello World</Title> */}
-      <h1>Hello</h1>
+      
       <GlobalStyle />
-    </div>
+      <Header/>
+    </>
   );
 }
 
