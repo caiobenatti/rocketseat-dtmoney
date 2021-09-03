@@ -14,9 +14,10 @@ export function App() {
     <> {/* isso eh um fragment, que nao interfere com as divs dentro do react, eh tipo uma div */}
       {/* <Title>Hello World</Title> */}
       
-      <GlobalStyle />
+     
       <Header/>
       <Dashboard />
+       <GlobalStyle />
     </>
   );
 }
