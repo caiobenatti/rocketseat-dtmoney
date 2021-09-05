@@ -42,6 +42,7 @@ export function NewTranscactionModal({
               setType("deposit");
             }}
             isActive={type === "deposit"}
+            activeColor="green"
           >
             <img src={incomeImg} alt="Income icon" />
             <span>Income</span>
@@ -52,6 +53,7 @@ export function NewTranscactionModal({
               setType("withdraw");
             }}
             isActive={type === "withdraw"}
+            activeColor="red"
           >
             <img src={outcomeImg} alt="Outcome icon" />
             <span>Outcome</span>
