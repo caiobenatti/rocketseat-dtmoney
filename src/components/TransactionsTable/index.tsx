@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { Container } from "./styles";
+import { TransactionsContext } from "../../TransactionsContext";
 
 interface Transaction {
   //tem de criar a interface para o react entender a informacao que vem da api e passar para o componente
@@ -13,6 +14,7 @@ interface Transaction {
 }
 
 export function TransactionsTable() {
+  const data = useContext(TransactionsContext);
   const [transactions, setTransactions] = useState<Transaction[]>([]); //aqui passa a interface e tem de passar [] senao ele so passa um objeto
 
   useEffect(() => {
