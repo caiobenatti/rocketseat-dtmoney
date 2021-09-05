@@ -15,22 +15,23 @@ export function NewTranscactionModal({
   isOpen,
   onRequestClose,
 }: NewTransactionModalProps) {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(""); //cria todos os hooks para salvar as informacoes vindas do value do form
   const [value, setValue] = useState(0);
   const [category, setCategory] = useState("");
   const [type, setType] = useState("deposit");
 
   function handleCreateNewTransaction(event: FormEvent) {
-    event.preventDefault();
+    event.preventDefault(); //previne a pagina de dar reload
 
     const data = {
+      //salva todas as informacoes do form em formato de objeto (json)
       title,
       value,
       category,
       type,
     };
 
-    api.post("/transactions", data);
+    api.post("/transactions", data); //manda as informacoes do form
   }
 
   return (
@@ -52,7 +53,7 @@ export function NewTranscactionModal({
         <input
           placeholder="Title"
           value={title}
-          onChange={(event) => setTitle(event.target.value)}
+          onChange={(event) => setTitle(event.target.value)} //quando muda o value, salva as informacoes do evento dentro do state
         />
         <input
           type="number"

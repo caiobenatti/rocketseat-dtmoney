@@ -5,18 +5,18 @@ import { App } from "./App"; //usa os brackets para importar aqui a funcao App p
 
 createServer({
   models: {
-    transaction: Model,
+    transaction: Model, //cria o Model para persistir as informacoes
   },
 
   routes() {
     this.namespace = "api";
 
     this.get("/transactions", () => {
-      return this.schema.all("transaction");
+      return this.schema.all("transaction"); //retorna todas as transicoes dentro do schema do model
     });
 
     this.post("/transactions", (schema, request) => {
-      const data = JSON.parse(request.requestBody);
+      const data = JSON.parse(request.requestBody); //da parse das informacoes pq elas sao mandadas em form de Json pelos forms
 
       return schema.create("transaction", data);
     });
