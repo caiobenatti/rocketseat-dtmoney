@@ -3,7 +3,7 @@ import { Container, TransactionTypeContainer, RadioBox } from "./style";
 import closeImg from "../../assets/close.svg";
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 interface NewTransactionModalProps {
   isOpen: boolean;
@@ -14,7 +14,21 @@ export function NewTranscactionModal({
   isOpen,
   onRequestClose,
 }: NewTransactionModalProps) {
+  const [title, setTitle] = useState("");
+  const [value, setValue] = useState(0);
+  const [category, setCategory] = useState("");
   const [type, setType] = useState("deposit");
+
+  function handleCreateNewTransaction(event: FormEvent) {
+    event.preventDefault();
+
+    console.log({
+      title,
+      value,
+      category,
+      type,
+    });
+  }
 
   return (
     <Modal
@@ -30,10 +44,19 @@ export function NewTranscactionModal({
       >
         <img src={closeImg} alt="Close" />
       </button>
-      <Container>
+      <Container onSubmit={handleCreateNewTransaction}>
         <h2>New Transaction</h2>
-        <input placeholder="Title" />
-        <input type="number" placeholder="Value" />
+        <input
+          placeholder="Title"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Value"
+          value={value}
+          onChange={(event) => setValue(Number(event.target.value))}
+        />
 
         <TransactionTypeContainer>
           <RadioBox
@@ -60,7 +83,11 @@ export function NewTranscactionModal({
           </RadioBox>
         </TransactionTypeContainer>
 
-        <input placeholder="Category" />
+        <input
+          placeholder="Category"
+          value={category}
+          onChange={(event) => setCategory(event.target.value)}
+        />
         <button type="submit">Done</button>
       </Container>
     </Modal>
