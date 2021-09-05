@@ -5,6 +5,7 @@ import { Header } from "./components/Header";
 import Modal from "react-modal";
 import { GlobalStyle } from "./styles/global";
 import { useState } from "react";
+import { NewTranscactionModal } from "./components/NewTransactionModal";
 
 // const Title = styled.h1` //vc usa aqui a tag HTML que vc quer modificar e usa a maiuscula no nome para nome da constante (best practices)
 // color: #8257e6;
@@ -31,12 +32,10 @@ export function App() {
       {/* <Title>Hello World</Title> */}
       <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />
       <Dashboard />
-      <Modal
+      <NewTranscactionModal
         isOpen={isNewTransactionModalOpen}
         onRequestClose={handleCloseNewTransactionModal}
-      >
-        <h2>New Transaction</h2>
-      </Modal>
+      />
       <GlobalStyle />
     </>
   );
