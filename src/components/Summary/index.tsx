@@ -7,7 +7,41 @@ import { Container } from "./styles";
 
 export function Summary() {
   const { transactions } = useContext(TransactionsContext); //tem de usar o transactions como objeto por causa do context
-  console.log(transactions);
+
+  // const totalDeposits = transactions.reduce((acc, transaction) => {
+  //   if (transaction.type === "deposit") {
+  //     return acc + transaction.amount; //aqui atualiza o valor total do income, caso seja negativo ele reconhece isso e subtrai o valor
+  //   }
+
+  //   return acc;
+  // }, 0);
+
+  const summary = transactions.reduce(
+    (acc, transaction) => {
+      if (transaction.type === "deposit") {
+        acc.deposits += transaction.amount;
+        acc.total += transaction.amount;
+      } else {
+        acc.withdraws -= transaction.amount;
+        acc.total -= transaction.amount;
+      }
+
+      return acc;
+    },
+    {
+      deposits: 0,
+      withdraws: 0,
+      total: 0,
+    }
+  );
+
+  function formatValuesCurrency(value: number) {
+    return Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "GBP",
+    }).format(value); //cria uma formatacao para todos os numeros
+  }
+
   return (
     <Container>
       <div>
@@ -15,21 +49,21 @@ export function Summary() {
           <p>Income</p>
           <img src={incomeImg} alt="Income img" />
         </header>
-        <strong>10000</strong>
+        <strong>{formatValuesCurrency(summary.deposits)}</strong>
       </div>
       <div>
         <header>
           <p>Expenses</p>
           <img src={outcomeImg} alt="Expenses img" />
         </header>
-        <strong>10000</strong>
+        <strong>{formatValuesCurrency(summary.withdraws)}</strong>
       </div>
       <div className="background-highlight">
         <header>
           <p>Total</p>
           <img src={totalImg} alt="Total img" />
         </header>
-        <strong>10000</strong>
+        <strong>{formatValuesCurrency(summary.total)}</strong>
       </div>
     </Container>
   );
