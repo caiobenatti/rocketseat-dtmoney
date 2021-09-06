@@ -70,6 +70,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
 }
 
 export function useTransactions() {
+  //aqui vc cria o hook e exporta ele junto com o useContext para nao ter de importar em todas as partes da aplicacao
   const context = useContext(TransactionsContext);
 
   return context;
