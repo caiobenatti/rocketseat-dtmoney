@@ -6,8 +6,8 @@ import { TransactionsContext } from "../../TransactionsContext";
 import { Container } from "./styles";
 
 export function Summary() {
-  const data = useContext(TransactionsContext);
-
+  const { transactions } = useContext(TransactionsContext); //tem de usar o transactions como objeto por causa do context
+  console.log(transactions);
   return (
     <Container>
       <div>
