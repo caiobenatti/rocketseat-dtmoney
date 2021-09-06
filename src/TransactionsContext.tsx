@@ -26,7 +26,7 @@ interface TransactionsProviderProps {
 
 interface TransactionsContextData {
   transactions: Transaction[];
-  createTransaction: (transaction: TransactionInput) => void; //cria a interface para o transaction context
+  createTransaction: (transaction: TransactionInput) => Promise<void>; //cria a interface para o transaction context , ai vc coloca a promise por causa da funcao ser assincrona
 }
 
 export const TransactionsContext = createContext<TransactionsContextData>( //passa o context data aqui dentro e usa o as TransactionsContextData para o React parar de dar erro
@@ -43,8 +43,15 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
       .then((response) => setTransactions(response.data.transactions));
   }, []);
 
-  function createTransaction(transaction: TransactionInput) {
-    api.post("/transactions", transaction); //manda as informacoes do form
+  async function createTransaction(transactionInput: TransactionInput) {
+    //transforma a funcao em assincrona para poder fechar o modal se tiver sucesso
+    const response = await api.post("/transactions", {
+      ...transactionInput,
+      createdAt: new Date(),
+    }); //manda as informacoes do form
+    const { transaction } = response.data;
+
+    setTransactions([...transactions, transaction]); // aqui usa o spread context para adicionar a transaction dentro do objeto que ja existia transactions
   }
 
   return (
