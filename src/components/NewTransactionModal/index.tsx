@@ -3,8 +3,8 @@ import { Container, TransactionTypeContainer, RadioBox } from "./style";
 import closeImg from "../../assets/close.svg";
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
-import { FormEvent, useState, useContext } from "react";
-import { TransactionsContext } from "../../TransactionsContext";
+import { FormEvent, useState } from "react";
+import { useTransactions } from "../../hooks/useTransactions";
 
 interface NewTransactionModalProps {
   isOpen: boolean;
@@ -15,7 +15,7 @@ export function NewTransactionModal({
   isOpen,
   onRequestClose,
 }: NewTransactionModalProps) {
-  const { createTransaction } = useContext(TransactionsContext);
+  const { createTransaction } = useTransactions();
 
   const [title, setTitle] = useState(""); //cria todos os hooks para salvar as informacoes vindas do value do form
   const [amount, setAmount] = useState(0);

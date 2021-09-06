@@ -6,7 +6,7 @@ import Modal from "react-modal";
 import { GlobalStyle } from "./styles/global";
 import { useState } from "react";
 import { NewTransactionModal } from "./components/NewTransactionModal";
-import { TransactionsProvider } from "./TransactionsContext";
+import { TransactionsProvider } from "./hooks/useTransactions";
 
 // const Title = styled.h1` //vc usa aqui a tag HTML que vc quer modificar e usa a maiuscula no nome para nome da constante (best practices)
 // color: #8257e6;

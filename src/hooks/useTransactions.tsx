@@ -1,5 +1,11 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
-import { api } from "./services/api";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { api } from "../services/api";
 
 interface Transaction {
   //tem de criar a interface para o react entender a informacao que vem da api e passar para o componente
@@ -29,7 +35,7 @@ interface TransactionsContextData {
   createTransaction: (transaction: TransactionInput) => Promise<void>; //cria a interface para o transaction context , ai vc coloca a promise por causa da funcao ser assincrona
 }
 
-export const TransactionsContext = createContext<TransactionsContextData>( //passa o context data aqui dentro e usa o as TransactionsContextData para o React parar de dar erro
+const TransactionsContext = createContext<TransactionsContextData>( //passa o context data aqui dentro e usa o as TransactionsContextData para o React parar de dar erro
   {} as TransactionsContextData
 );
 
@@ -61,4 +67,10 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
       {children}
     </TransactionsContext.Provider>
   );
+}
+
+export function useTransactions() {
+  const context = useContext(TransactionsContext);
+
+  return context;
 }
